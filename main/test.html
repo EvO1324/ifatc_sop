@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOPs</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>Welcome to whatever this is</h1>
+        </nav>
+        <form id="search-form" onsubmit="return false;">
+            <input type="text" id="search-bar" placeholder="search field etc...." oninput="searchAircrafts()">
+        </form>
+    </header>
+
+   <!-- Main content below -->
+    <main>  
+        <section id="airbus">
+            <h2>Content</h2>
+            <p>View Aiport Guides</p>
+            <ul class="aircraft-list">
+                <li></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2025 ifatc_sops (the name is shite and needs to change lol)
+    </footer>
+
+    <script>
+        // script for drop down menu
+
+        function filterAircraftsByManufacturer() {
+            const dropdown = document.getElementById("aircraft-dropdown");
+            const selectedValue = dropdown.value;
+            const sections = document.querySelectorAll("section");
+
+            sections.forEach(section => {
+                if (selectedValue === "all" || section.id === selectedValue.substring(1)) {
+                    section.style.display = "block";
+                } else {
+                    section.style.display = "none";
+                }
+            });
+        }
+        
+        // js searches for aircraft... only aircraft manufacturer
+        function searchAircrafts() {
+            const searchTerm = document.getElementById("search-bar").value.toLowerCase();
+            const sections = document.querySelectorAll("section");
+
+            // filter for search.
+            sections.forEach(section => {
+                const listItems = section.querySelectorAll("ul.aircraft-list li");
+                let matchFound = false;
+            
+                // dispalys search results
+                
+                listItems.forEach(item => {
+                    const linkText = item.textContent.toLowerCase();
+                    if (linkText.includes(searchTerm)) {
+                        item.style.display = "block"; // shows matches for search term
+                        matchFound = true;
+                    } else {
+                        item.style.display = "none"; // hides anything that doesn't match search term
+                    }
+                });
+
+                // no matches will show blank
+                if (!matchFound) {
+                    section.style.display = "none";
+                } else {
+                    section.style.display = "block";
+                }
+            });
+        }
+
+        alert("Page is WIP. For Full access please DM me");
+    </script>
+
+</body>
+</html>
